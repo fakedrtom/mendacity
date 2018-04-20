@@ -1,0 +1,49 @@
+pedigree:
+- &mgma 
+    id: Clara
+    status: unaffected
+    sex: female
+- &mgpa 
+    id: Sam
+    status: unaffected
+    sex: male
+- &dad
+    id: Fred
+    status: unaffected
+    sex: male
+- &mom
+    id: Alice
+    status: unaffected
+    sex: female
+- 
+    id: Bobby
+    status: affected
+    sex: female
+    father: *dad
+    mother: *mom
+
+cases:
+-
+  name: ar-test
+  description: simple autosomal-recessive
+  alts: [[1, 0, 1, 1, 2]]
+  modes: ["autosomal-recessive"]
+  not-modes: ["autosomal-dominant"]
+-
+  name: ar-missing-test1
+  description: simple autosomal-recessive with missing dad
+  alts: [[1, 0, -1, 1, 2]]
+  modes: ["autosomal-recessive"]
+  not-modes: ["autosomal-dominant"]
+-
+  name: ar-missing-test2
+  description: simple autosomal-recessive with missing mom
+  alts: [[-1, -1, 1, -1, 2]]
+  modes: ["autosomal-recessive"]
+  not-modes: ["autosomal-dominant"]
+-
+  name: ar-missing-test3
+  description: simple autosomal-recessive with both parents missing
+  alts: [[-1, -1, -1, -1, 2]]
+  modes: ["autosomal-recessive"]
+  not-modes: ["autosomal-dominant"]
