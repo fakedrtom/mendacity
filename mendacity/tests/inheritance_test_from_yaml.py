@@ -42,18 +42,20 @@ yaml_ped = y.pop('pedigree')
 make_ped(yaml_ped)
 fam = Family.from_ped(open("tmp.ped", 'r'))
 efam = EvalFamily(fam)
-n = 500
+rgtdict = {0: "G/G", 1: "G/A", 2: "A/A", -1: "./."}
 for test in y['cases']:
     new_alts = []
+    gts = []
     for alt in test['alts'][0]:
+        gt = rgtdict[alt]
+        gts.append(gt)
         if alt == -1:
             alt = 2
         elif alt == 2:
             alt = 3
         new_alts.append(alt)
     efam.gt_types = new_alts
-    print efam.auto_rec(), efam.auto_dom(), efam.de_novo(), new_alts
-#for i in range(n):
-#    efam.gt_types = [random.randint(0,3), random.randint(0,3), random.randint(0,3)]
-#    print efam.gt_types, "auto_rec", efam.auto_rec(), "auto_dom", efam.auto_dom(), "de_novo", efam.de_novo()
+    print gts, efam.auto_rec(strict=False), efam.auto_rec(strict=True), efam.auto_dom(strict=False), efam.auto_dom(strict=True), efam.de_novo(strict=False), efam.de_novo(strict=True), efam.x_rec(), efam.x_dom(), efam.x_denovo()
+
+
 
